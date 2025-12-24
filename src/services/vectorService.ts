@@ -1,6 +1,6 @@
 import { Pinecone } from "@pinecone-database/pinecone";
 import { generateEmbedding } from "./embeddingService";
-import { userProfileOnlyToText, userPreferencesToText } from "@utils/userToText";
+import { userProfileOnlyToText, userPreferencesToText } from "../utils/userToText";
 import type { UserSchema } from "@models/userModel";
 import process from "node:process";
 
