@@ -231,9 +231,9 @@ pnpm vector:migrate
 ✅ Found 14 bidirectional matches
 
 🏆 TOP 5 MATCHING USERS
-1. Emily Young - Score: 67.9% - Distance: 2077.0 km
-2. Linda Clark - Score: 66.2% - Distance: 2077.0 km
-3. Sandra Hernandez - Score: 64.4% - Distance: 663.0 km
+1. Emily Young - Score: 67.9% - Distance:7.0 km
+2. Linda Clark - Score: 66.2% - Distance:7.0 km
+3. Sandra Hernandez - Score: 64.4% - Distance:3.0 km
 ```
 
 ## 📚 API Endpoints
@@ -345,20 +345,7 @@ lsof -ti:8000 | xargs kill -9
 3. Index exists and is ready
 4. HuggingFace token is valid
 
-## 💰 Cost Breakdown
 
-### Free Tier (Development)
-- **HuggingFace**: $0/month (embeddings)
-- **Pinecone**: $0/month (free tier)
-- **MongoDB Atlas**: $0/month (free tier M0)
-- **Total**: **$0/month** for development
-
-### Production (Estimated for 10,000 users)
-- **HuggingFace**: $0/month (still free!)
-- **Pinecone**: ~$70/month (standard tier)
-- **MongoDB Atlas**: ~$57/month (M10)
-- **OpenAI**: ~$50/month (bio moderation + fallback)
-- **Total**: ~$180/month
 
 ## 🎯 Performance
 
