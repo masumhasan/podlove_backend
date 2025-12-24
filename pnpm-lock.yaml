@@ -135,6 +135,9 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.7
         version: 9.0.7
+      '@types/luxon':
+        specifier: ^3.7.1
+        version: 3.7.1
       '@types/multer':
         specifier: ^1.4.13
         version: 1.4.13
