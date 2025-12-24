@@ -9,6 +9,16 @@
             "date": 1766551858859,
             "name": "C:\\20300\\github\\podlove_backend\\logs\\winston\\successes\\um-2025-12-24-10-success.log",
             "hash": "a7957466e8e75f67225bb644bc1ef9f5ac83dd0e6c0397cbe9236a0c0cada7e7"
+        },
+        {
+            "date": 1766555206718,
+            "name": "C:\\20300\\github\\podlove_backend\\logs\\winston\\successes\\um-2025-12-24-11-success.log",
+            "hash": "0f9b72a4adb3b4adcfec96335e12da0cce94d722531aa6fffb3fcf7122f56d46"
+        },
+        {
+            "date": 1766556369501,
+            "name": "C:\\20300\\github\\podlove_backend\\logs\\winston\\successes\\um-2025-12-24-12-success.log",
+            "hash": "60e0cd74049fe9876f499239520306b655bb4042428fd545310bbdbf1912aff4"
         }
     ],
     "hashType": "sha256"

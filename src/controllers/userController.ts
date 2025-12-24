@@ -5,6 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import to from "await-to-ts";
 import Cloudinary from "@shared/cloudinary";
 import mongoose from "mongoose";
+import { upsertUserVector } from "@services/vectorService";
 
 const getAll = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   const { search, minAge, maxAge, gender, bodyType, ethnicity } = req.query;
@@ -214,6 +215,11 @@ const update = async (req: Request, res: Response, next: NextFunction): Promise<
 
     await session.commitTransaction();
     session.endSession();
+
+    // Sync to Pinecone (non-blocking)
+    upsertUserVector(user).catch((err) =>
+      console.error("Failed to sync user to Pinecone:", err)
+    );
 
     return res.status(StatusCodes.OK).json({
       success: true,

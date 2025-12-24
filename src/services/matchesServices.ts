@@ -9,6 +9,7 @@ import mongoose, { Types } from "mongoose";
 import Podcast from "@models/podcastModel";
 import { calculateDistance } from "@utils/calculateDistanceUtils";
 import { SubscriptionPlanName } from "@shared/enums";
+import { findSimilarUsers } from "./vectorService";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 const MODEL = "gpt-4o";
 
@@ -173,74 +174,87 @@ async function findMatches(userId: string, answers: string[], limitCount: number
 
   const pref = user.preferences;
 
-  // 4) Fetch candidates matching preferences
+  // 4) Fetch candidates matching preferences - ONLY COMPLETE PROFILES
   let candidates = await User.find({
     _id: { $ne: user._id },
     dateOfBirth: { $gte: ageToDOB(pref.age.max), $lte: ageToDOB(pref.age.min) },
     gender: { $in: pref.gender },
     bodyType: { $in: pref.bodyType },
     isMatch: false,
+    isProfileComplete: true, // ONLY complete profiles
     ethnicity: { $in: pref.ethnicity },
     "location.latitude": { $exists: true },
     "location.longitude": { $exists: true },
   }, null, { session }
   ).lean();
 
-  // 5) Distance filtering (strict)
-  const nearby = candidates.filter((c) => {
+  if (candidates.length === 0) {
+    console.log("No candidates found matching criteria");
+    return [];
+  }
+
+  // 5) Try bidirectional vector matching
+  let scoredCandidates: { user: any; score: number }[];
+  
+  try {
+    const candidateIds = candidates.map((c) => c._id.toString());
+    const vectorScores = await findSimilarUsers(user, candidateIds, candidates.length);
+    
+    console.log(`✅ Using vector similarity scores for ${vectorScores.length} candidates`);
+    
+    // Map scores back to candidates
+    const scoreMap = new Map(vectorScores.map((v) => [v.userId, v.score]));
+    scoredCandidates = candidates.map((c) => ({
+      user: c,
+      score: (scoreMap.get(c._id.toString()) || 0) * 100, // Convert to 0-100 scale
+    }));
+  } catch (error: any) {
+    console.warn("⚠️  Vector search failed, falling back to OpenAI compatibility");
+    
+    // Fallback to OpenAI compatibility scoring
+    scoredCandidates = await Promise.all(
+      candidates.map(async (c) => ({
+        user: c,
+        score: (await getCompatibilityScore(answers, c.compatibility || [])) ?? 0,
+      }))
+    );
+    
+    console.log(`✅ Using OpenAI compatibility scores for ${scoredCandidates.length} candidates`);
+  }
+
+  // 6) Apply STRICT distance filtering AFTER scoring
+  const withinDistance = scoredCandidates.filter((item) => {
     const dist = calculateDistance(
       user.location.latitude,
       user.location.longitude,
-      c.location.latitude,
-      c.location.longitude
+      item.user.location.latitude,
+      item.user.location.longitude
     );
-    return dist <= pref.distance;
+    const isWithin = dist <= pref.distance;
+    
+    if (!isWithin) {
+      console.log(
+        `📍 Filtering out user ${item.user._id}: ${dist.toFixed(1)}km exceeds ${pref.distance}km preference`
+      );
+    }
+    
+    return isWithin;
   });
 
-  // 6) Fallback if not enough users
-  let finalCandidates = nearby;
-  if (nearby.length < limitCount) {
-    const fallback = await User.find(
-      {
-        _id: { $ne: user._id },
-        isMatch: false,
-        gender: { $in: pref.gender },
-        "location.latitude": { $exists: true },
-        "location.longitude": { $exists: true },
-      },
-      null,
-      { session }
-    ).lean();
+  console.log(`📍 ${withinDistance.length} matches within ${pref.distance}km distance preference`);
 
-    const fallbackNearby = fallback.filter((c) => {
-      const dist = calculateDistance(
-        user.location.latitude,
-        user.location.longitude,
-        c.location.latitude,
-        c.location.longitude
-      );
-      return dist <= pref.distance;
-    });
-
-    finalCandidates = [...nearby, ...fallbackNearby];
-  }
-
-  // 7) Compute compatibility scores
-  const scored = await Promise.all(
-    finalCandidates.map(async (c) => ({
-      user: c,
-      score: await getCompatibilityScore(answers, c.compatibility || []),
-    }))
-  );
-
-  // 8) Sort & return top
-  return scored
+  // 7) Sort by score and return top N
+  const topMatches = withinDistance
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limitCount)
     .map((item) => ({
       user: item.user._id,
-      score: item.score ?? 0,
-    }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limitCount);
+      score: item.score,
+    }));
+
+  console.log(`✅ Returning ${topMatches.length} matches (all within ${pref.distance}km)`);
+
+  return topMatches;
 }
 
 const matchUser = async (

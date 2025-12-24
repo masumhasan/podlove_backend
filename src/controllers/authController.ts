@@ -9,6 +9,7 @@ import sendEmail from "@utils/sendEmail";
 import sendSMS from "@utils/sendSMS";
 import { sendPhoneVerificationMessage } from "./phone-verify/twilio.verify";
 import VerifyPhone from "@models/phoneModel";
+import { upsertUserVector } from "@services/vectorService";
 
 const register = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   const {
@@ -89,6 +90,12 @@ const register = async (req: Request, res: Response, next: NextFunction): Promis
     });
 
     await user.save();
+
+    // Sync new user to Pinecone (non-blocking)
+    upsertUserVector(user).catch((err) =>
+      console.error("Failed to sync new user to Pinecone:", err)
+    );
+
     await sendEmail(email, auth.verificationOTP);
   }
 

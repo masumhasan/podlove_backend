@@ -8,6 +8,7 @@ import { SubscriptionPlanName, SubscriptionStatus } from "@shared/enums";
 import OpenaiServices from "./openaiServices";
 import cron from "node-cron";
 import { logger } from "@shared/logger";
+import { upsertUserVector } from "./vectorService";
 import Notification from "@models/notificationModel";
 
 cron.schedule("0 0 * * *", async () => { // every day at midnight
@@ -127,6 +128,12 @@ const validateBio = async (req: Request, res: Response, next: NextFunction): Pro
     if (!updatedUserBio) {
       return next(createError(StatusCodes.NOT_FOUND, "User not found"));
     }
+
+    // Sync to Pinecone after bio update (non-blocking)
+    upsertUserVector(updatedUserBio).catch((err) =>
+      console.error("Failed to sync user to Pinecone after bio update:", err)
+    );
+
     return res.status(StatusCodes.OK).json({ success: true, message: "Success", data: { updatedUserBio } });
   }
 
