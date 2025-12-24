@@ -380,10 +380,24 @@ const findMatch = async (req: Request, res: Response, next: NextFunction): Promi
         matchCount = 3;
     }
 
-    // 3) Compute participants (this will update user's compatibility inside)
-    const participants = await findMatches(req.user.userId, user.compatibility, matchCount, session);
+    // 3) Compute AI-based matches (this will update user's compatibility inside)
+    const topMatches = await findMatches(req.user.userId, user.compatibility, matchCount, session);
 
-    // 4) Update or create the podcast document
+    // 4) Format participants with primary user and matched users
+    const participants = [
+      {
+        user: user._id,
+        score: 100,
+        isQuestionAnswer: "",
+      },
+      ...topMatches.map((m) => ({
+        user: m.user,
+        score: m.score,
+        isQuestionAnswer: ""
+      })),
+    ];
+
+    // 5) Update or create the podcast document
     const podcastUpdate = await Podcast.findOneAndUpdate(
       { primaryUser: user._id },
       { $set: { participants } },
