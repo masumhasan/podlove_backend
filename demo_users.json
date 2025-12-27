@@ -1,0 +1,357 @@
+[
+  {
+    "name": "Alex Martinez",
+    "email": "alex.martinez@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Male",
+    "dateOfBirth": "3/10/1993",
+    "location": {
+      "latitude": 40.7128,
+      "longitude": -74.006,
+      "place": "New York, NY"
+    },
+    "bio": "Software engineer passionate about technology, fitness, and outdoor adventures. Love hiking on weekends and trying new restaurants. Looking for someone who shares similar interests and values meaningful conversations.",
+    "bodyType": "Athletic",
+    "ethnicity": [
+      "White"
+    ],
+    "interests": [
+      "Technology",
+      "Fitness",
+      "Hiking",
+      "Cooking",
+      "Travel"
+    ],
+    "personality": {
+      "spectrum": 3,
+      "balance": 4,
+      "focus": 3
+    },
+    "preferences": {
+      "gender": [
+        "Female"
+      ],
+      "age": {
+        "min": 28,
+        "max": 38
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Slim",
+        "Average"
+      ],
+      "ethnicity": [
+        "White",
+        "Asian",
+        "Hispanic",
+        "Mixed"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Value career and ambition",
+      "Enjoy outdoor activities",
+      "Prefer meaningful conversations over small talk",
+      "Love trying new experiences"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015887",
+    "updatedAt": "2025-12-27T14:39:27.015892"
+  },
+  {
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Female",
+    "dateOfBirth": "16/8/1995",
+    "location": {
+      "latitude": 40.7228,
+      "longitude": -73.996,
+      "place": "Brooklyn, NY"
+    },
+    "bio": "Tech enthusiast and fitness lover. Passionate about hiking and exploring new places. Looking for someone ambitious who enjoys both adventure and deep conversations.",
+    "bodyType": "Athletic",
+    "ethnicity": [
+      "White"
+    ],
+    "interests": [
+      "Technology",
+      "Hiking",
+      "Yoga",
+      "Photography",
+      "Travel"
+    ],
+    "personality": {
+      "spectrum": 4,
+      "balance": 4,
+      "focus": 3
+    },
+    "preferences": {
+      "gender": [
+        "Male"
+      ],
+      "age": {
+        "min": 30,
+        "max": 40
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Slim",
+        "Muscular"
+      ],
+      "ethnicity": [
+        "White",
+        "Mixed",
+        "Hispanic"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Value career and ambition",
+      "Enjoy outdoor activities",
+      "Prefer meaningful conversations over small talk",
+      "Appreciate work-life balance"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015900",
+    "updatedAt": "2025-12-27T14:39:27.015902"
+  },
+  {
+    "name": "Emily Chen",
+    "email": "emily.chen@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Female",
+    "dateOfBirth": "14/1/1996",
+    "location": {
+      "latitude": 40.6928,
+      "longitude": -73.986,
+      "place": "Queens, NY"
+    },
+    "bio": "Software developer who loves coding and cooking. Enjoy weekend hikes and exploring the city. Seeking someone who's passionate about technology and growth.",
+    "bodyType": "Slim",
+    "ethnicity": [
+      "Asian"
+    ],
+    "interests": [
+      "Technology",
+      "Cooking",
+      "Hiking",
+      "Reading",
+      "Music"
+    ],
+    "personality": {
+      "spectrum": 3,
+      "balance": 5,
+      "focus": 4
+    },
+    "preferences": {
+      "gender": [
+        "Male"
+      ],
+      "age": {
+        "min": 28,
+        "max": 36
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Slim",
+        "Average"
+      ],
+      "ethnicity": [
+        "White",
+        "Asian",
+        "Mixed"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Love trying new restaurants",
+      "Enjoy outdoor activities",
+      "Tech-savvy and career-focused",
+      "Value personal growth"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015908",
+    "updatedAt": "2025-12-27T14:39:27.015909"
+  },
+  {
+    "name": "Jessica Rodriguez",
+    "email": "jessica.rodriguez@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Female",
+    "dateOfBirth": "6/7/1992",
+    "location": {
+      "latitude": 40.7428,
+      "longitude": -74.016,
+      "place": "Manhattan, NY"
+    },
+    "bio": "Fitness instructor and travel enthusiast. Love hiking, exploring new cuisines, and meaningful conversations. Looking for someone adventurous and down-to-earth.",
+    "bodyType": "Athletic",
+    "ethnicity": [
+      "Hispanic"
+    ],
+    "interests": [
+      "Fitness",
+      "Travel",
+      "Cooking",
+      "Hiking",
+      "Dancing"
+    ],
+    "personality": {
+      "spectrum": 4,
+      "balance": 3,
+      "focus": 3
+    },
+    "preferences": {
+      "gender": [
+        "Male"
+      ],
+      "age": {
+        "min": 30,
+        "max": 38
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Muscular",
+        "Slim"
+      ],
+      "ethnicity": [
+        "White",
+        "Hispanic",
+        "Mixed"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Enjoy outdoor activities",
+      "Love trying new experiences",
+      "Value fitness and health",
+      "Prefer meaningful conversations"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015915",
+    "updatedAt": "2025-12-27T14:39:27.015916"
+  },
+  {
+    "name": "Olivia Thompson",
+    "email": "olivia.thompson@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Female",
+    "dateOfBirth": "15/6/1994",
+    "location": {
+      "latitude": 40.7028,
+      "longitude": -74.026,
+      "place": "Bronx, NY"
+    },
+    "bio": "Digital marketing specialist with a passion for technology and outdoor adventures. Weekend hiker and food explorer. Seeking someone who values both career and fun.",
+    "bodyType": "Average",
+    "ethnicity": [
+      "Mixed"
+    ],
+    "interests": [
+      "Technology",
+      "Hiking",
+      "Photography",
+      "Food",
+      "Travel"
+    ],
+    "personality": {
+      "spectrum": 3,
+      "balance": 4,
+      "focus": 4
+    },
+    "preferences": {
+      "gender": [
+        "Male"
+      ],
+      "age": {
+        "min": 29,
+        "max": 37
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Average",
+        "Slim"
+      ],
+      "ethnicity": [
+        "White",
+        "Mixed",
+        "Asian"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Tech-savvy and career-focused",
+      "Enjoy outdoor activities",
+      "Love trying new experiences",
+      "Value meaningful conversations"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015926",
+    "updatedAt": "2025-12-27T14:39:27.015927"
+  },
+  {
+    "name": "Mia Williams",
+    "email": "mia.williams@demo.com",
+    "password": "$2b$10$demohashedpassword123",
+    "gender": "Female",
+    "dateOfBirth": "2/2/1990",
+    "location": {
+      "latitude": 40.732800000000005,
+      "longitude": -73.976,
+      "place": "Staten Island, NY"
+    },
+    "bio": "Product manager who loves technology, fitness, and exploring new restaurants. Enjoy hiking trails and weekend adventures. Looking for someone ambitious and fun-loving.",
+    "bodyType": "Slim",
+    "ethnicity": [
+      "White"
+    ],
+    "interests": [
+      "Technology",
+      "Fitness",
+      "Cooking",
+      "Hiking",
+      "Wine"
+    ],
+    "personality": {
+      "spectrum": 4,
+      "balance": 5,
+      "focus": 3
+    },
+    "preferences": {
+      "gender": [
+        "Male"
+      ],
+      "age": {
+        "min": 30,
+        "max": 40
+      },
+      "distance": 50,
+      "bodyType": [
+        "Athletic",
+        "Slim",
+        "Average"
+      ],
+      "ethnicity": [
+        "White",
+        "Asian",
+        "Mixed"
+      ]
+    },
+    "isProfileComplete": true,
+    "isMatch": false,
+    "compatibility": [
+      "Value career and ambition",
+      "Love trying new restaurants",
+      "Enjoy outdoor activities",
+      "Appreciate work-life balance"
+    ],
+    "createdAt": "2025-12-27T14:39:27.015932",
+    "updatedAt": "2025-12-27T14:39:27.015933"
+  }
+]

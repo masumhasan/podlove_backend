@@ -12,6 +12,9 @@ import ConsumerPolicy from "@models/consumerPolicyModel";
 import MediaPolicy from "@models/mediaPolicyModel";
 import { Server as SocketIOServer } from "socket.io";
 import initSocketHandlers from "@services/socketService";
+import { checkPineconeHealth } from "@services/vectorService";
+import { generateEmbedding } from "@services/embeddingService";
+
 const PORT = process.env.PORT || 8000;
 
 async function checkAdmin() {
@@ -34,6 +37,31 @@ async function checkAdmin() {
   }
 }
 
+async function checkPineconeConnection() {
+  try {
+    const isHealthy = await checkPineconeHealth();
+    if (isHealthy) {
+      logger.info("✅ Pinecone Vector Database connected successfully");
+    } else {
+      logger.warn("⚠️  Pinecone connection issue - matching may fall back to OpenAI");
+    }
+  } catch (error: any) {
+    logger.error(`❌ Pinecone connection failed: ${error.message}`);
+    logger.warn("⚠️  Vector matching will use OpenAI fallback");
+  }
+}
+
+async function checkOpenAIConnection() {
+  try {
+    // Test OpenAI by generating a small test embedding
+    await generateEmbedding("test");
+    logger.info("✅ OpenAI API connected successfully");
+  } catch (error: any) {
+    logger.error(`❌ OpenAI connection failed: ${error.message}`);
+    logger.warn("⚠️  Embedding generation and AI features may not work");
+  }
+}
+
 async function startServer() {
   try {
     await connectDB();
@@ -42,6 +70,10 @@ async function startServer() {
     await Privacy.findOrCreate();
     await ConsumerPolicy.findOrCreate();
     await MediaPolicy.findOrCreate();
+
+    // Check AI services
+    await checkPineconeConnection();
+    await checkOpenAIConnection();
 
     const server = http.createServer(app);
     // const socketService = new SocketService(server);
@@ -53,8 +85,8 @@ async function startServer() {
 
     const ipaddress: any = process.env.ip || "0.0.0.0";
     server.listen(PORT, ipaddress, () => {
-      logger.info(`Server is running at PORT: ${PORT}, HOST: ${ipaddress}`);
-      logger.info(`Socket.IO server initialized`);
+      logger.info(`✅ Server is running at PORT: ${PORT}, HOST: ${ipaddress}`);
+      logger.info(`✅ Socket.IO server initialized`);
       // startPodcastScheduler();
     });
   } catch (error) {
