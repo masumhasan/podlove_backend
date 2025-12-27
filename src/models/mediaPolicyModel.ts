@@ -15,7 +15,7 @@ mediaPolicySchema.statics.findOrCreate = async function (): Promise<void> {
   const mediaPolicy = await this.findOne();
   if (!mediaPolicy) {
     await this.create({ text: "Media Policy" });
-    logger.info(" ✅ Media Policy added Successfully!");
+    logger.info(" ✅ Media Policy added Successfully! ");
   } else {
     logger.info("Media Policy exists!");
   }
