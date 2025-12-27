@@ -107,5 +107,6 @@ async function testVectorSetup() {
   console.log("✅ All tests passed! Vector matching setup is ready.\n");
 }
 
+
 // Run tests
 testVectorSetup();
