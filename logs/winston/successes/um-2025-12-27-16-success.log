@@ -1,0 +1,8 @@
+Sat Dec 27 2025 16:29:50 [Podlove] [32minfo[39m: ✅ Successfully Connected to MongoDB Atlas
+Sat Dec 27 2025 16:29:55 [Podlove] [32minfo[39m: Privacy Policy exists!
+Sat Dec 27 2025 16:29:56 [Podlove] [32minfo[39m: Consumer Policy exists!
+Sat Dec 27 2025 16:29:56 [Podlove] [32minfo[39m: Media Policy exists!
+Sat Dec 27 2025 16:30:0 [Podlove] [32minfo[39m: ✅ Pinecone Vector Database connected successfully
+Sat Dec 27 2025 16:30:2 [Podlove] [32minfo[39m: ✅ OpenAI API connected successfully
+Sat Dec 27 2025 16:30:2 [Podlove] [32minfo[39m: ✅ Server is running at PORT: 8000, HOST: 0.0.0.0
+Sat Dec 27 2025 16:30:2 [Podlove] [32minfo[39m: ✅ Socket.IO server initialized
