@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide walks you through setting up **bidirectional AI-powered matching** using HuggingFace embeddings and Pinecone vector database.
+This guide walks you through setting up **bidirectional AI-powered matching** using OpenAI embeddings and Pinecone vector database.
 
 ### What You'll Get
 - ✅ Dual vector storage (profile + preferences per user)
@@ -10,7 +10,7 @@ This guide walks you through setting up **bidirectional AI-powered matching** us
 - ✅ All profiles stored and synced automatically
 - ✅ Strict distance filtering
 - ✅ Complete profiles only in results
-- ✅ Free embeddings (HuggingFace)
+- ✅ Fast, high-quality embeddings (OpenAI)
 
 ---
 
@@ -35,7 +35,7 @@ Region: us-east-1 (or closest to you)
 Check your `.env` file has:
 
 ```env
-HUGGINGFACE_ACCESS_TOKEN=hf_...
+OPENAI_KEY=sk-proj-...
 PINECONE_API_KEY=pcsk_...
 PINECONE_INDEX=users
 ```
@@ -60,7 +60,7 @@ Expected output:
 2️⃣  Checking Pinecone connection...
    ✅ Pinecone index "users" is ready
 
-3️⃣  Testing HuggingFace embedding generation...
+3️⃣  Testing OpenAI embedding generation...
    ✅ Embedding generated successfully (1024 dimensions)
 
 4️⃣  Testing user profile conversion...
@@ -103,7 +103,7 @@ Found 52 users total
 Total vectors: 104 (52 users × 2 vectors each)
 ```
 
-**Time**: ~10-40 minutes depending on user count (rate limiting on free HuggingFace tier)
+**Time**: ~2-10 minutes depending on user count (OpenAI has higher rate limits)
 
 ---
 

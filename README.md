@@ -61,7 +61,7 @@ This is a Node.js/TypeScript backend that powers a dating application with intel
 │  │  Services                            │   │
 │  │  - Matching (AI Vector Search)      │   │
 │  │  - Vector Service (Pinecone)        │   │
-│  │  - Embedding Service (HuggingFace)  │   │
+│  │  - Embedding Service (OpenAI)      │   │
 │  │  - OpenAI Service                    │   │
 │  └─────────────┬───────────────────────┘   │
 └────────────────┼─────────────────────────────┘
@@ -82,7 +82,7 @@ This is a Node.js/TypeScript backend that powers a dating application with intel
 - Node.js 18+ and pnpm
 - MongoDB Atlas account
 - Pinecone account (free tier works)
-- HuggingFace account (free tier works)
+- OpenAI API account with credits
 - OpenAI API key
 - Twilio account (for SMS)
 - Stripe account (for payments)

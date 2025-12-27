@@ -13,6 +13,7 @@
     "dev": "nodemon -r tsconfig-paths/register src/server.ts",
     "vector:test": "ts-node -r tsconfig-paths/register scripts/testVectorSetup.ts",
     "vector:migrate": "ts-node -r tsconfig-paths/register scripts/migrateUsersToVectorDB.ts",
+    "vector:recreate": "ts-node -r tsconfig-paths/register scripts/recreatePineconeIndex.ts",
     "test:matching": "ts-node -r tsconfig-paths/register scripts/testMatching.ts",
     "test:openai": "ts-node -r tsconfig-paths/register scripts/testOpenAIEmbeddings.ts",
     "checkusers": "ts-node -r tsconfig-paths/register scripts/checkUsers.ts"

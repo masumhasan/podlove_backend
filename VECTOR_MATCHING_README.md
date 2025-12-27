@@ -4,7 +4,7 @@
 
 This implementation enhances the existing matchmaking system with **AI-based similarity search** using:
 
-- **HuggingFace Embeddings** (`BAAI/bge-large-en-v1.5`) - Converts user profiles to semantic vectors (1024 dimensions)
+- **OpenAI Embeddings** (`text-embedding-3-small`) - Converts user profiles to semantic vectors (1024 dimensions)
 - **Pinecone Vector Database** - Stores and searches vectors for similarity matching (1024 dimensions)
 - **MongoDB** - Remains the primary data store and source of truth
 
@@ -36,12 +36,12 @@ MongoDB (Hard Filters + Complete Profiles Only) → Pinecone (Bidirectional Simi
 ### Services
 
 1. **`src/services/embeddingService.ts`**
-   - Generates HuggingFace embeddings for text (FREE)
+   - Generates OpenAI embeddings for text
    - Handles single and batch embedding generation
-   - Uses `BAAI/bge-large-en-v1.5` model (1024 dimensions native)
-   - Returns native 1024-dimensional embeddings
+   - Uses `text-embedding-3-small` model (1024 dimensions custom)
+   - Returns 1024-dimensional embeddings
    - Implements exponential backoff retry logic (1s → 2s → 4s)
-   - Rate limit handling for free tier API
+   - Rate limit handling with automatic retry
 
 2. **`src/services/vectorService.ts`**
    - Manages all Pinecone operations
@@ -123,7 +123,7 @@ graph TB
 Ensure these are set in your `.env`:
 
 ```env
-HUGGINGFACE_ACCESS_TOKEN=hf_...
+OPENAI_KEY=sk-proj-...
 PINECONE_API_KEY=pcsk_...
 PINECONE_INDEX=users
 ```
@@ -133,7 +133,7 @@ PINECONE_INDEX=users
 Create an index in your Pinecone dashboard:
 
 - **Index Name**: `users`
-- **Dimensions**: `1024` (native HuggingFace embeddings)
+- **Dimensions**: `1024` (custom dimension for OpenAI text-embedding-3-small)
 - **Metric**: `cosine` (recommended for embeddings)
 - **Cloud**: AWS
 - **Region**: `us-east-1`
@@ -196,7 +196,7 @@ Each user has **TWO vectors** in Pinecone:
 - **Embedding**: 1024-dimensional representation of WHAT the user WANTS
 - **Used for**: Matching against other users' PROFILES
 
-**Dimension Details**: 1024-dim from HuggingFace (native dimension)
+**Dimension Details**: 1024-dim from OpenAI (custom dimension)
 
 ### Metadata (for filtering)
 - `userId` - MongoDB _id
@@ -222,7 +222,7 @@ The embedding captures:
 ## Performance Considerations
 
 ### Embedding Generation
-- **Model**: HuggingFace `BAAI/bge-large-en-v1.5` (FREE)
+- **Model**: OpenAI `text-embedding-3-small` (cost-effective)
 - **Time**: ~500-1000ms per user (free tier with rate limits)
 - **Cost**: **$0.00** (completely free!)
 - **Batching**: Migration script processes 10 users per batch with 2s delays
@@ -264,15 +264,15 @@ The embedding captures:
 ## Cost Estimation
 
 ### One-Time Migration (1000 users)
-- Embeddings: **$0.00** (HuggingFace is free!)
+- Embeddings: **~$0.001** (OpenAI text-embedding-3-small: $0.00002 per 1K tokens, ~2 vectors per user)
 - Pinecone storage: ~2MB = **~$0.02/month**
-- Time: ~30-40 minutes (due to rate limiting)
+- Time: ~2-5 minutes (OpenAI has higher rate limits)
 
 ### Ongoing Costs (per 1000 operations)
-- Embeddings: **$0.00** (HuggingFace is free!)
+- Embeddings: **~$0.001** (OpenAI text-embedding-3-small)
 - Pinecone queries: 1000 × ~$0.00001 = **~$0.01**
 
-**Total**: ~$0.01 per 1000 operations (extremely cost-effective!)
+**Total**: ~$0.011 per 1000 operations (extremely cost-effective!)
 
 ## Troubleshooting
 
@@ -287,10 +287,10 @@ The embedding captures:
 ### Embedding generation fails
 
 ```bash
-Error generating embedding: <HuggingFace error>
+Error generating embedding: <OpenAI error>
 ```
 
-**Solution**: Check `HUGGINGFACE_ACCESS_TOKEN` environment variable
+**Solution**: Check `OPENAI_KEY` environment variable and ensure you have API credits
 
 ### Rate limit errors (429)
 
@@ -298,7 +298,7 @@ Error generating embedding: <HuggingFace error>
 Rate limit exceeded, retrying...
 ```
 
-**Solution**: Retry logic will handle this automatically. For faster processing, consider upgrading to HuggingFace Pro tier.
+**Solution**: Retry logic will handle this automatically. OpenAI has higher rate limits with paid tiers.
 
 ### Migration script fails
 

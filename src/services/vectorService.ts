@@ -4,17 +4,24 @@ import { userProfileOnlyToText, userPreferencesToText } from "../utils/userToTex
 import type { UserSchema } from "@models/userModel";
 import process from "node:process";
 
-const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY!,
-});
+// Lazy initialization to ensure dotenv is loaded first
+let pinecone: Pinecone | null = null;
 
-const INDEX_NAME = process.env.PINECONE_INDEX || "users";
+function getPineconeClient(): Pinecone {
+  if (!pinecone) {
+    pinecone = new Pinecone({
+      apiKey: process.env.PINECONE_API_KEY!,
+    });
+  }
+  return pinecone;
+}
 
 /**
  * Gets the Pinecone index instance
  */
 function getIndex() {
-  return pinecone.index(INDEX_NAME);
+  const indexName = process.env.PINECONE_INDEX || "users";
+  return getPineconeClient().index(indexName);
 }
 
 /**
@@ -22,11 +29,13 @@ function getIndex() {
  */
 export async function checkPineconeHealth(): Promise<boolean> {
   try {
+    const indexName = process.env.PINECONE_INDEX || "users";
     const indexStats = await getIndex().describeIndexStats();
-    console.log(`✅ Pinecone index "${INDEX_NAME}" is ready`);
+    console.log(`✅ Pinecone index "${indexName}" is ready`);
     return true;
   } catch (error: any) {
-    console.error(`⚠️  Pinecone index "${INDEX_NAME}" health check failed:`, error.message);
+    const indexName = process.env.PINECONE_INDEX || "users";
+    console.error(`⚠️  Pinecone index "${indexName}" health check failed:`, error.message);
     return false;
   }
 }
@@ -198,8 +207,9 @@ export async function findSimilarUsers(
       generateEmbedding(samplePreferenceText),
     ]);
 
+    const indexName = process.env.PINECONE_INDEX || "users";
     console.log(
-      `🔍 Querying Pinecone index: ${INDEX_NAME} for bidirectional similarity`
+      `🔍 Querying Pinecone index: ${indexName} for bidirectional similarity`
     );
 
     // BIDIRECTIONAL MATCHING:

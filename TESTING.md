@@ -36,7 +36,7 @@ pnpm vector:test
 **What it does:**
 - Checks environment variables
 - Tests Pinecone connection
-- Tests HuggingFace embedding generation
+- Tests OpenAI embedding generation
 - Validates configuration
 
 **Example output:**
@@ -49,7 +49,7 @@ pnpm vector:test
 2️⃣  Checking Pinecone connection...
    ✅ Pinecone index "podlove-users" is ready
 
-3️⃣  Testing HuggingFace embedding generation...
+3️⃣  Testing OpenAI embedding generation...
    ✅ Embedding generated successfully (1024 dimensions)
 
 ✅ All tests passed!

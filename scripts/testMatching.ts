@@ -67,7 +67,7 @@ async function testMatching() {
     console.log("👤 Test User Profile:");
     console.log(`   Name: ${user.name}`);
     console.log(`   Gender: ${user.gender}`);
-    console.log(`   Age: ${user.dateOfBirth}`);
+    console.log(`   Date of Birth: ${user.dateOfBirth}`);
     console.log(`   Location: ${user.location?.place || "Not set"}`);
     console.log(`   Bio: ${user.bio || "No bio"}\n`);
     
@@ -163,6 +163,30 @@ function displayMatches(matches: any[], testUser: any, hasScores: boolean) {
   console.log(`🏆 TOP ${matches.length} MATCHING USERS`);
   console.log("═".repeat(80));
 
+  // Helper function to calculate age from date of birth
+  const calculateAge = (dob: string): number => {
+    if (!dob) return 0;
+    
+    // Parse date in DD/MM/YYYY or D/M/YYYY format
+    const parts = dob.split('/');
+    if (parts.length !== 3) return 0;
+    
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // JavaScript months are 0-indexed
+    const year = parseInt(parts[2], 10);
+    
+    if (isNaN(day) || isNaN(month) || isNaN(year)) return 0;
+    
+    const birthDate = new Date(year, month, day);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   matches.forEach((match, index) => {
     const distance = calculateDistance(
       testUser.location.latitude,
@@ -178,8 +202,10 @@ function displayMatches(matches: any[], testUser: any, hasScores: boolean) {
       console.log(`   🎯 Match Score: ${match.matchScore?.toFixed(1)}%`);
     }
     
+    const age = match.dateOfBirth ? calculateAge(match.dateOfBirth) : null;
+    
     console.log(`   👤 Gender: ${match.gender || "Not specified"}`);
-    console.log(`   📅 Date of Birth: ${match.dateOfBirth || "Not specified"}`);
+    console.log(`   📅 Age: ${age !== null ? age : "Not specified"}`);
     console.log(`   🏋️ Body Type: ${match.bodyType || "Not specified"}`);
     console.log(`   🌍 Ethnicity: ${Array.isArray(match.ethnicity) ? match.ethnicity.join(", ") : "Not specified"}`);
     console.log(`   📍 Location: ${match.location?.place || "Not specified"}`);

@@ -12,7 +12,7 @@ async function testVectorSetup() {
   // 1. Check environment variables
   console.log("1️⃣  Checking environment variables...");
   const requiredEnvVars = [
-    "HUGGINGFACE_ACCESS_TOKEN",
+    "OPENAI_KEY",
     "PINECONE_API_KEY",
     "PINECONE_INDEX",
   ];
@@ -40,8 +40,8 @@ async function testVectorSetup() {
     process.exit(1);
   }
 
-  // 3. Test HuggingFace embedding generation
-  console.log("3️⃣  Testing HuggingFace embedding generation...");
+  // 3. Test OpenAI embedding generation
+  console.log("3️⃣  Testing OpenAI embedding generation...");
   try {
     const testText = "I am a 28-year-old software engineer who loves hiking and photography.";
     const embedding = await generateEmbedding(testText);
