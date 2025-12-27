@@ -16,6 +16,7 @@
     "vector:recreate": "ts-node -r tsconfig-paths/register scripts/recreatePineconeIndex.ts",
     "test:matching": "ts-node -r tsconfig-paths/register scripts/testMatching.ts",
     "test:openai": "ts-node -r tsconfig-paths/register scripts/testOpenAIEmbeddings.ts",
+    "test:performance": "ts-node -r tsconfig-paths/register scripts/testPineconePerformance.ts",
     "checkusers": "ts-node -r tsconfig-paths/register scripts/checkUsers.ts"
   },
   "keywords": [],
@@ -27,7 +28,6 @@
     "@aws-sdk/client-s3": "^3.886.0",
     "@aws-sdk/s3-request-presigner": "^3.888.0",
     "@google/generative-ai": "^0.24.1",
-    "@huggingface/inference": "^4.13.5",
     "@pinecone-database/pinecone": "^6.1.3",
     "await-to-ts": "^1.0.6",
     "bcrypt": "^5.1.1",

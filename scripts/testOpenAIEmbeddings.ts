@@ -19,7 +19,7 @@ async function testOpenAIEmbeddings() {
   // Step 1: Verify Environment Variables
   console.log('\n📋 Step 1: Checking Environment Variables...');
   const requiredVars = {
-    OPENAI_KEY: process.env.OPENAI_KEY,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     PINECONE_API_KEY: process.env.PINECONE_API_KEY,
     PINECONE_INDEX: process.env.PINECONE_INDEX,
   };
@@ -44,7 +44,7 @@ async function testOpenAIEmbeddings() {
   let openai: OpenAI;
   try {
     openai = new OpenAI({
-      apiKey: process.env.OPENAI_KEY,
+      apiKey: process.env.OPENAI_API_KEY,
     });
     console.log('   ✅ OpenAI client initialized');
   } catch (error) {
@@ -86,7 +86,7 @@ async function testOpenAIEmbeddings() {
   } catch (error: any) {
     console.error('   ❌ Failed to generate embedding:', error.message);
     if (error.status === 401) {
-      console.error('   💡 Check your OPENAI_KEY in .env file');
+      console.error('   💡 Check your OPENAI_API_KEY in .env file');
     }
     process.exit(1);
   }

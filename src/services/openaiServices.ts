@@ -14,7 +14,7 @@ import {
 } from "@google/generative-ai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;

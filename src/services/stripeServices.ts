@@ -11,7 +11,7 @@ import { calculateDistance } from "@utils/calculateDistanceUtils";
 import Podcast from "@models/podcastModel";
 import OpenAI from "openai";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const MODEL = "gpt-4o";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

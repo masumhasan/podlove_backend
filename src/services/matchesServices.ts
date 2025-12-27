@@ -10,7 +10,7 @@ import Podcast from "@models/podcastModel";
 import { calculateDistance } from "@utils/calculateDistanceUtils";
 import { SubscriptionPlanName } from "@shared/enums";
 import { findSimilarUsers } from "./vectorService";
-const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const MODEL = "gpt-4o";
 
 export interface Preferences {

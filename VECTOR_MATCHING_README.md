@@ -123,7 +123,7 @@ graph TB
 Ensure these are set in your `.env`:
 
 ```env
-OPENAI_KEY=sk-proj-...
+OPENAI_API_KEY=sk-proj-...
 PINECONE_API_KEY=pcsk_...
 PINECONE_INDEX=users
 ```
@@ -290,7 +290,7 @@ The embedding captures:
 Error generating embedding: <OpenAI error>
 ```
 
-**Solution**: Check `OPENAI_KEY` environment variable and ensure you have API credits
+**Solution**: Check `OPENAI_API_KEY` environment variable and ensure you have API credits
 
 ### Rate limit errors (429)
 

@@ -12,7 +12,7 @@ async function testVectorSetup() {
   // 1. Check environment variables
   console.log("1️⃣  Checking environment variables...");
   const requiredEnvVars = [
-    "OPENAI_KEY",
+    "OPENAI_API_KEY",
     "PINECONE_API_KEY",
     "PINECONE_INDEX",
   ];

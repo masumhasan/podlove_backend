@@ -7,8 +7,8 @@ Copy this checklist and follow it step-by-step to get bidirectional vector match
 ## Pre-Flight Checks ✈️
 
 - [x] **Pinecone SDK installed** (`@pinecone-database/pinecone`)
-- [x] **HuggingFace Inference SDK installed** (`@huggingface/inference`)
-- [x] **Environment variables set** (HUGGINGFACE_ACCESS_TOKEN, PINECONE_API_KEY, PINECONE_INDEX)
+- [x] **OpenAI SDK installed** (`openai`)
+- [x] **Environment variables set** (OPENAI_KEY, PINECONE_API_KEY, PINECONE_INDEX)
 - [x] **MongoDB connection working** (ATLAS_URI)
 - [x] **TypeScript compilation successful** (no errors)
 
@@ -86,7 +86,7 @@ Total vectors: 104 (52 users × 2 vectors each)
 **Number of users migrated**: _______  
 **Total vectors created**: _______ (should be 2× users)
 
-**Note**: Takes longer due to rate limiting on free HuggingFace tier
+**Note**: Migration is fast with OpenAI (typically 2-5 minutes)
 
 ---
 
@@ -204,8 +204,8 @@ If yes, check:
 ### Issue: "Error generating embedding"
 
 **Fix**:
-1. Check `OPENAI_KEY` in `.env` is valid
-2. Test with: `curl https://api.openai.com/v1/models -H "Authorization: Bearer $OPENAI_KEY"`
+1. Check `OPENAI_API_KEY` in `.env` is valid
+2. Test with: `curl https://api.openai.com/v1/models -H "Authorization: Bearer $OPENAI_API_KEY"`
 3. Generate new key if needed
 
 **Fixed?**: [ ] Yes [ ] No

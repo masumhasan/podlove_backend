@@ -99,7 +99,7 @@ PORT=8000
 ATLAS_URI=mongodb+srv://...
 
 # AI & Matching
-OPENAI_KEY=sk-proj-...
+OPENAI_API_KEY=sk-proj-...
 PINECONE_API_KEY=pcsk_...
 PINECONE_INDEX=podlove-users
 HUGGINGFACE_ACCESS_TOKEN=hf_...
@@ -269,10 +269,13 @@ pnpm run build        # Build for production
 pnpm run start        # Start production server
 
 # Vector matching scripts
-pnpm vector:test      # Test setup
-pnpm vector:migrate   # Migrate users to Pinecone
-pnpm test:matching    # Test AI matching
-pnpm checkusers       # Check database stats
+pnpm vector:test       # Test Pinecone/OpenAI setup
+pnpm vector:migrate    # Migrate users to Pinecone
+pnpm vector:recreate   # Recreate Pinecone index (1024 dims)
+pnpm test:matching     # Test AI matching with sample user
+pnpm test:openai       # Test OpenAI embeddings
+pnpm test:performance  # Performance & latency metrics
+pnpm checkusers        # Check database stats
 ```
 
 ## 📁 Project Structure
@@ -288,7 +291,7 @@ src/
 ├── services/              # Business logic
 │   ├── matchesServices.ts      # AI matching logic
 │   ├── vectorService.ts        # Pinecone operations
-│   ├── embeddingService.ts     # HuggingFace embeddings
+│   ├── embeddingService.ts     # OpenAI embeddings
 │   ├── openaiServices.ts       # OpenAI integration
 │   └── ...
 ├── models/                # MongoDB schemas
@@ -302,7 +305,7 @@ src/
 └── shared/                # Shared utilities
 
 scripts/
-├── testVectorSetup.ts     # Test Pinecone/HuggingFace
+├── testVectorSetup.ts     # Test Pinecone/OpenAI
 ├── migrateUsersToVectorDB.ts  # Migrate users
 ├── testMatching.ts        # Test matching system
 └── checkUsers.ts          # Check database
@@ -333,7 +336,7 @@ lsof -ti:8000 | xargs kill -9
 
 **Solution**: Check with `pnpm checkusers` and adjust preferences or increase distance.
 
-### Rate Limit Errors (HuggingFace)
+### Rate Limit Errors (OpenAI)
 **Error**: `429 Too Many Requests`
 
 **Solution**: Free tier has rate limits. Script has automatic retry. Just wait.
@@ -343,7 +346,7 @@ lsof -ti:8000 | xargs kill -9
 1. MongoDB connection (`ATLAS_URI`)
 2. Pinecone credentials (`PINECONE_API_KEY`)
 3. Index exists and is ready
-4. HuggingFace token is valid
+4. OpenAI API key is valid
 
 
 
@@ -421,7 +424,7 @@ Proprietary - All rights reserved
 
 ## 🎉 Acknowledgments
 
-- **HuggingFace** for free embedding generation
+- **OpenAI** for high-quality embedding generation
 - **Pinecone** for excellent vector database
 - **OpenAI** for GPT-4 compatibility scoring
 - **MongoDB** for reliable database
