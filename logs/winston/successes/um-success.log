@@ -28234,3 +28234,9 @@ Error: Failed to fetch videos
 Error
 Sun Jan 04 2026 16:48:14 [Podlove] [32minfo[39m: Successfully Connected to MongoDB Atlas
 Sun Jan 04 2026 16:51:14 [Podlove] [32minfo[39m: Successfully Connected to MongoDB Atlas
+Sun Jan 04 2026 17:5:7 [Podlove] [32minfo[39m: Successfully Connected to MongoDB Atlas
+Sun Jan 04 2026 17:5:11 [Podlove] [32minfo[39m: Privacy Policy exists!
+Sun Jan 04 2026 17:5:11 [Podlove] [32minfo[39m: Consumer Policy exists!
+Sun Jan 04 2026 17:5:12 [Podlove] [32minfo[39m: Media Policy exists!
+Sun Jan 04 2026 17:5:12 [Podlove] [32minfo[39m: Server is running at PORT: 8000, HOST: 0.0.0.0
+Sun Jan 04 2026 17:5:12 [Podlove] [32minfo[39m: Socket.IO server initialized
