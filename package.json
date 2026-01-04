@@ -8,9 +8,9 @@
     ]
   },
   "scripts": {
-    "start": "node dist/server.js",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
+    "start": "node init && node dist/server.js",
+    "build": "node init && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "dev": "node init && nodemon -r tsconfig-paths/register src/server.ts",
     "test:matching": "ts-node -r tsconfig-paths/register scripts/testMatching.ts"
   },
   "keywords": [],
