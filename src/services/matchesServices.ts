@@ -406,9 +406,28 @@ async function findMatchesWithVectors(
     }
 
     // 5) Load full user documents for further processing
-    const candidateIds = vectorResults.map((r) => new Types.ObjectId(r.userId));
+    // Filter out invalid IDs to prevent BSON errors
+    const validCandidateIds: Types.ObjectId[] = [];
+    for (const r of vectorResults) {
+      if (mongoose.Types.ObjectId.isValid(r.userId)) {
+        validCandidateIds.push(new Types.ObjectId(r.userId));
+      } else {
+        console.warn(`⚠️ Skipping invalid potential match ID: ${r.userId}`);
+      }
+    }
+
+    if (validCandidateIds.length === 0) {
+      if (matchingConfig.ENABLE_MATCH_LOGGING) {
+        console.log("No valid candidate IDs found in vector results.");
+      }
+      if (matchingConfig.ENABLE_VECTOR_FALLBACK) {
+        return await findMatchesTraditional(userId, answers, limitCount, session);
+      }
+      return [];
+    }
+
     const candidates = await User.find(
-      { _id: { $in: candidateIds } },
+      { _id: { $in: validCandidateIds } },
       null,
       { session }
     ).lean();

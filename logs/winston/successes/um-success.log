@@ -28223,3 +28223,14 @@ Sun Jan 04 2026 14:45:29 [Podlove] [32minfo[39m: Consumer Policy exists!
 Sun Jan 04 2026 14:45:30 [Podlove] [32minfo[39m: Media Policy exists!
 Sun Jan 04 2026 14:45:30 [Podlove] [32minfo[39m: Server is running at PORT: 8000, HOST: 0.0.0.0
 Sun Jan 04 2026 14:45:30 [Podlove] [32minfo[39m: Socket.IO server initialized
+Sun Jan 04 2026 14:46:23 [Podlove] [32minfo[39m: 69537e187d57648bdab1d196
+Sun Jan 04 2026 14:46:23 [Podlove] [32minfo[39m: 69537e187d57648bdab1d196
+Sun Jan 04 2026 14:46:34 [Podlove] [32minfo[39m: 69537e187d57648bdab1d196
+Sun Jan 04 2026 14:52:59 [Podlove] [31merror[39m: Failed to fetch videos
+Error: Failed to fetch videos
+    at Object.getExistingVideos (C:\20300\github\pl\podlove_backend\src\podcast\podcast.service.ts:409:15)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getExistingVideos (C:\20300\github\pl\podlove_backend\src\podcast\podcast.controller.ts:71:20)
+Error
+Sun Jan 04 2026 16:48:14 [Podlove] [32minfo[39m: Successfully Connected to MongoDB Atlas
+Sun Jan 04 2026 16:51:14 [Podlove] [32minfo[39m: Successfully Connected to MongoDB Atlas

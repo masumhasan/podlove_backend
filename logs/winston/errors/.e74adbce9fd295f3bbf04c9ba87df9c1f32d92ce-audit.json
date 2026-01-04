@@ -69,6 +69,16 @@
             "date": 1767513641875,
             "name": "C:\\20300\\github\\pl\\podlove_backend\\logs\\winston\\errors\\um-2026-01-04-14-error.log",
             "hash": "a434cf8e02e62c1a395c44bbaa13fd625dda33da03b892a130c48acafb6fcbd0"
+        },
+        {
+            "date": 1767523690280,
+            "name": "C:\\20300\\github\\pl\\podlove_backend\\logs\\winston\\errors\\um-2026-01-04-16-error.log",
+            "hash": "8883f85e29fd0877e18761cb9138b4167db354a6f3669aa79e246932bbbb9ae2"
+        },
+        {
+            "date": 1767524699481,
+            "name": "C:\\20300\\github\\pl\\podlove_backend\\logs\\winston\\errors\\um-2026-01-04-17-error.log",
+            "hash": "ca2f003f2816d39c0ecfa8e0d2cb9e4ddcc7ffd3a1fc7431feb02fa02e27dedf"
         }
     ],
     "hashType": "sha256"
